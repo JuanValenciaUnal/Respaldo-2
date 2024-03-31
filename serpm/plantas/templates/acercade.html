@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- enlaces para botosn de whatsApp -->
+<!-- Enlazar CSS Floating WhatsApp -->
+<link rel="stylesheet" href="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.css">
+<!-- Enlazar JS Floating WhatsApp -->
+<script type="text/javascript" src="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.js"></script>
+
+<link rel="stylesheet" href="{% static '/css/estiloshome.css' %}">
+<script src="{% static '/js/jshome.js' %}"></script>
+<link re>
+<br><br><br>
+
+<!-- botn de whatsApp-->
+<div id="WABoton"></div>
+<div class="container">
+  <div class="abs-center">
+      <form hx-post="#"
+        hx-indicator="#indicador"
+        hx-target="#contenidob">
+        {% csrf_token %} 
+
+      </form>
+  </div>
+
+  <div class="productos" id="contenidob" name="contenidob" style="text-align: center;">  
+    <div class="container" style="text-align: center;">
+      <img id="indicador" class="htmx-indicator" src="{% static 'gifs/cargando.gif' %}"/>
+    </div>
+</div>
+<br>
+<div style="text-align: center;">
+  <h5>Aerca de</h5>
+  <h1 style="font-size: 90px; color: #005ba6; text-shadow: 2px 2px 4px #000; -webkit-text-stroke: 2px #ffffff;font-weight: 700;">SERM</h1>
+  <h5>Sistema Experto para Recomendación de Plantas Medicinales</h5>
+  <br>
+  <img src="{% static '/img/logo.png' %}" alt="Descripción de la imagen">
+</div>
+</div>
+{% if messages %}
+    {% for m in messages %}
+      <script>
+        Swal.fire({
+         title:"Mensaje",
+         html:"{{m}}",
+         icon:"success",
+         iconColor:"#BA2100",
+         confirmButtonText:"ok",
+         confirmButtonColor:"#0b0b0b",         
+         timer:3000,
+         toast:"toast",
+        })   
+      document.getElementById("cajabusca").focus();
+    </script>        
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}

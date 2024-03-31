@@ -1,0 +1,98 @@
+
+En Ubuntu, esto funciona para mí:
+sudo apt install libcairo2-dev pkg-config python3-dev
+y luego:
+pip install pycairo
+
+
+PARA WINDOWS
+https://www.youtube.com/watch?v=wo2u0hq6sck
+
+TUTORIAL COMPLETO
+https://www.youtube.com/watch?v=T1intZyhXDU
+
+
+MANUAL INSTALALCION DJANGO LINUX
+https://www.youtube.com/watch?v=wZZJtn8xRQ8
+sudo apt update
+
+INSTALAR PIP y VENEV
+sudo apt install python3-pip python3-venv
+
+CREAR PRPOYECTO CON ENVN
+python3 -m venv nom-entorno-virtual
+en la mism carpeta del proyecto debo activar el entonro virtual
+source nom-entorno-virtual/bin/activate
+
+Para desactivar el entorno virtual
+deactivate
+Como mirar que tiene instalaldo el entorno virtual en la misma carpeta del proyecto 
+pip3 freeze
+
+INSTALALR DJANDO  con el entorno virtual activo.
+pip3 install Django==4.2.8 DEPENDE LA VERSION
+
+saber la version de django que esta instalalda
+django-admin --version o con python3 -m django --version
+
+
+CREAR PROYECTO
+conel entorno virtual activo
+django-admin startproject nom-proyecto que vamso a crear con el enterno virtual activo
+
+abrir carpeta del proyecto y abrir editor
+code .
+
+EJECUTAR PROYECTO
+python3 manage.py runserver
+
+CAMBIAR PROYECTO A ESPAÑOL
+settings.py
+LANGUAGUE_CODE='es'
+
+CREAR APP
+python3 manage.py startapp nombre aplicacion
+
+CONEXION CON POSTGRES
+
+pip install psycopg2-binary
+
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME' : 'pruebas',
+		'USER' : 'postgres',
+		'PASSWORD' : '123',
+		'HOST' : 'localhost', 
+		'PORT' : '5432',
+	}
+}
+
+ACTIVAR EL PANEL SE ADMISNITRACION
+
+python3 manage.py createsuperuser
+sera crea el ususario y se le pone la contraseña
+
+cuando saca error No migrations to apply
+python3 manage.py migrate --fake inventario zero
+y luego hacer de nuevo el migrate
+
+IMPORTAR DATOS DE CSV
+copy a_ciudades from '/mnt/02C02E7425D99820/Colombia codigo/poblaciones.csv' delimiter ',' csv header;
+
+GENERAR ARCHIVO DE REQUERIMIENTOS
+Genera elarchivo
+pip freeze > requirements.txt
+Instala lo que contieneelarchivo requirements.txt
+pip install to-requirements.txt
+
+INSTALAR jinja2
+pip install jinja2
+
+CONSULTAS DIRECTAS EN SQL
+consecutivo = 1
+xx=Trueques_destino.objects.raw("SELECT * FROM a_trueque_destino WHERE consecutivo = %s", [consecutivo])
+print(list(xx))
+
+
+     <!-- <form hx-post="{% url 'buscar' %}" -->

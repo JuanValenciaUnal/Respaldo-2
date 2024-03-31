@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{% static '/img/favicon.png' %}" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="ruta/a/tu-favicon-grande.png">  
+  <title>SERPM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<!-- libreria font-awesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
+<!-- libreria sweetalert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<style>
+  body {
+  background-color: #ffffff;
+}
+  .fondocabecera {
+    background-color: #005ba6 !important;
+    font-size: 12;
+  }
+
+#navbarSupportedContent {
+    z-index: 1000; /* para sobre poner el menu */
+}
+.navbar-collapse {
+    margin: 0 0 0 5px !important;
+    border-radius: 10px; 
+    background: #2680c9;
+    color: white; 
+    /*height: 4vh; */
+    padding: 5px; 
+}
+
+#navbarToggleBtn {
+    margin-left: 20px !important;
+}
+/* Aplicar margen a los elementos nav-item */
+.navbar-collapse .navbar-nav .nav-item {
+    margin-right: 5px;
+}
+</style>
+<!--  
+<script src="https://unpkg.com/htmx.org@1.9.9"></script>
+-->
+<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+
+
+<!-- cabecera del la pagina -->
+<ul id="datosenca" name="datosenca" class="nav justify-content-center fondocabecera" style="font-size: 12px;">
+  <a class="navbar-brand" href="#"></a>
+  <li class="nav-item">
+    <a class="nav-link aria-current=page" href="tel:3146751980" style="color:#ececec"><img
+      src="{% static '/img/teli.png' %}" class="d-inline-block align-top" width="17" height="17px"> (+57) 313 548 1524</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link aria-current=page" href="mailto:ventas@fincaluzdesol.com" style="color:#ececec;"><img
+      src="{% static '/img/emaili.png' %}" class="d-inline-block align-top" width="22" height="17px"> juanjose.valencia22@gmail.com</a>
+  </li>
+
+</ul>
+<div class="container-fluid " style="height: 4px;background-color:#ffff00; height: 3pcx; margin-bottom: 0px;"></div>
+    <nav class="navbar navbar-expand-lg navbar-light;" style="padding:20px;margin-top:0px;height:20px;">
+      <div class="container">
+        <a class="navbar-brand"> <img src="{% static '/img/logo.png' %}" class="img-fluid" width="50" height="60"></a>
+        <button class="navbar-toggler" id="navbarToggleBtn" type="button" data-bs-toggle="collapse" 
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation" >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 14px;width: 100px;">
+          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto;">
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'acercade' %}"><i class="fa-regular fa-address-card"></i> Acerca de</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin"><i class="fa-regular fa-address-card"></i> Panel Administración</a>
+                  </li>                
+
+            </ul>
+
+        </div>
+      </div>
+    </nav>
+  </div>
+</head>
+
+<body>
+{% block content %}
+
+
+{% endblock %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>  
+
+<!-- importaciones para data table yquery-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+<script src="{% static '/js/formatosmonedafecha.js' %}"></script>  
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div class="container-fluid" style="height: 3px;background-color:#ffff00; height: 3pcx;  color:#00db63ff;"></div>
+
+
+<div class="container-fluid" style="background-color: #2680c9">
+    <p style="font-family: 'Times New Roman', Times, serif; color: #ffffff;text-align: center;"><br />
+      Manizales, Caldas, Colombia <br />
+      <b>Teléfono: </b>(+57)&nbsp;313 548 1524</br>
+      2024 Derechos Reservados, Juan José Vaencia Martínez</a></p>
+  <br>
+</div>
+</html>

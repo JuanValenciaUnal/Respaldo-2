@@ -1,0 +1,101 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<!-- enlaces para botosn de whatsApp -->
+<!-- Enlazar CSS Floating WhatsApp -->
+<link rel="stylesheet" href="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.css">
+<!-- Enlazar JS Floating WhatsApp -->
+<script type="text/javascript" src="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.js"></script>
+
+<script src="{% static '/js/jshome.js' %}"></script>
+<link re>
+<br><br><br>
+
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-md-6 offset-md-3">
+          <div class="card shadow-lg p-1 mb-1 container-lg bg-light container" style="max-width: 35rem;">
+              <div class="card-body">
+                  <div class="card shadow-lg p-1 mb-1;card text-white" style="text-align: center;height: 50px;box-shadow: 01px 01px 01px 01px;background-color:#005ba6;"><h2>RECOMENDACIONES</h2></div>
+                  <br>  
+                  <div class="container-fluid" style="color: brown;text-align: center;">{{error}}</div>
+                  <form method ="POST" 
+                      hx-POST="{% url 'recomendaciones' %}"
+                      hx-indicador="#indicador2"
+                      hx-target="#resultados"                  
+                  >
+                      {% csrf_token %} 
+                      {{form.media}}
+                      {{form|crispy}}
+
+                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Selecione Afección: *&nbsp;&nbsp;
+                        <select class="form-select" id="afecciones" name="afecciones">
+                            <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
+                            {% for afeccion in afecciones %}
+                                <option value="{{afeccion.afeccion}}">{{afeccion.afeccion}}</option> 
+                            {% endfor %}
+                        </select>
+                      </span>
+                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Edad: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="form-control" type="number"  pattern="[0-9]+" id="edad" name="edad" value="1" required>                        
+                      </span>                      
+                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Selecione Genero: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select class="form-select" id="genero" name="genero"
+                            hx-get="{% url 'cargadatos' %}"
+                            hx-indicador="#indicador"
+                            hx-target="#fila_datos"
+                          >
+                            <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
+                            <option value="0" required>---------</option>
+                            {% for genero in generos %}
+                                <option value="{{genero.genero}}">{{genero.genero}}</option> 
+                            {% endfor %}
+                        </select>
+                      </span>
+
+                      <div class="row" id="fila_datos" name="fila_datos" >
+                          <img id="indicador" name="indicador" class="htmx-indicator"  style="width: 20px; height: 20px;" src="{% static 'gifs/cargando.gif' %}" />
+                      </div>
+
+                      <br>
+                      <div style="text-align:right">                      
+                      <button type="submit" id="bregistrar" name="bregistrar" class="btn btn-primary">Recomendar...</button>
+                      </div> 
+                  </form>
+          </div>
+      </div>
+  </div>
+  <div class="row" id="resultados" name="resultados" >
+    <img id="indicador2" name="indicador2" class="htmx-indicator" src="{% static 'gifs/cargando.gif' %}" />
+</div>
+  </div>
+</div>
+
+  <div class="productos" id="contenidob" name="contenidob" style="text-align: center;">  
+    <div class="container" style="text-align: center;">
+      <img id="indicador" class="htmx-indicator" src="{% static 'gifs/cargando.gif' %}"/>
+    </div>
+</div>
+
+</div>
+{% if messages %}
+    {% for m in messages %}
+      <script>
+        Swal.fire({
+         title:"Mensaje",
+         html:"{{m}}",
+         icon:"success",
+         iconColor:"#BA2100",
+         confirmButtonText:"ok",
+         confirmButtonColor:"#0b0b0b",         
+         timer:3000,
+         toast:"toast",
+        })   
+      document.getElementById("cajabusca").focus();
+    </script>        
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}
