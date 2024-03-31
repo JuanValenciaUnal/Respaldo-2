@@ -44,6 +44,10 @@
 .navbar-collapse .navbar-nav .nav-item {
     margin-right: 5px;
 }
+.offcanvas {
+    background-color: #2680c9;
+    color: #ffffff;
+  }
 </style>
 <!--  
 <script src="https://unpkg.com/htmx.org@1.9.9"></script>
@@ -76,13 +80,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 14px;width: 100px;">
           <ul class="navbar-nav mb-2 mb-lg-0 ms-auto;">
                 <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Inicio</a>
+                <a class="nav-link" href="{% url 'home' %}"  style="color:#ececec;"><i class="fas fa-home"></i> Inicio</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{% url 'acercade' %}"><i class="fa-regular fa-address-card"></i> Acerca de</a>
+                <a class="nav-link" href="{% url 'acercade' %}"  style="color:#ececec;"><i class="fa-regular fa-address-card"></i> Acerca de</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="admin"><i class="fa-regular fa-address-card"></i> Panel Administración</a>
+                  <a class="nav-link" href="{% url 'home' %}"  style="color:#ececec;"><i class="fa-regular fa-plus"></i> Recomendaciones</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" href="{% url 'home' %}"  style="color:#ececec;"><i class="fa-solid fa-filter"></i> Recomendaciones</a>
+                </li>                 
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/"  style="color:#ececec;"><i class="fa-regular fa-address-card"></i> Panel Administración</a>
                   </li>                
 
             </ul>
@@ -92,7 +103,16 @@
     </nav>
   </div>
 </head>
-
+<div class="container">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel" style="text-align: center;">Sus recomendaciones...</h5>
+      <button type="button" class="btn-close bg-secondary" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Try scrolling the rest of the page to see this option in action.</p>
+    </div>
+  </div>
 <body>
 {% block content %}
 

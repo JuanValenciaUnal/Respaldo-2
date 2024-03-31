@@ -29,19 +29,41 @@
                       {% csrf_token %} 
                       {{form.media}}
                       {{form|crispy}}
-
-                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Selecione Afección: *&nbsp;&nbsp;
+                      <label for="" style="color: #005ba6;font-weight: bold;">Afecciónes: *</label>
+                      <span class="input-group-text" id="basic-addon1" >
                         <select class="form-select" id="afecciones" name="afecciones">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
+                            <option value="0">Selecione afección</option> 
                             {% for afeccion in afecciones %}
                                 <option value="{{afeccion.afeccion}}">{{afeccion.afeccion}}</option> 
                             {% endfor %}
                         </select>
                       </span>
-                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Edad: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <hr>
+                      <label for="" style="color: #005ba6;font-weight: bold;">Enfermedades Adicionales: *</label>
+                      <span class="input-group-text" id="basic-addon1">
+                        <select class="form-select" id="enfermedadesa" name="enfermedadesa" multiple>
+                            <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
+                            {% for enferemdadesadicional in enferemdadesadicionales %}
+                                <option value="{{enferemdadesadicional.enfermedad}}">{{enferemdadesadicional.enfermedad}}</option> 
+                            {% endfor %}
+                        </select>
+                      </span> 
+                      <hr>  
+                      <label for="" style="color: #005ba6;font-weight: bold;">Hipersensibilidad: *</label>
+                      <span class="input-group-text" id="basic-addon1">
+                        <select class="form-select" id="hipsesensibilidades" name="hipsesensibilidades" multiple>
+                            <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
+                            {% for hipersensibilidad in hipersensibilidades %}
+                                <option value="{{hipersensibilidad.componente}}">{{hipersensibilidad.componente}}</option> 
+                            {% endfor %}
+                        </select>
+                      </span>                       
+                      <hr>                   
+                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Edad: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input class="form-control" type="number"  pattern="[0-9]+" id="edad" name="edad" value="1" required>                        
                       </span>                      
-                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Selecione Genero: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span class="input-group-text" id="basic-addon1" style="color: #005ba6;font-weight: bold;">Selecione Genero: *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <select class="form-select" id="genero" name="genero"
                             hx-get="{% url 'cargadatos' %}"
                             hx-indicador="#indicador"
@@ -54,6 +76,7 @@
                             {% endfor %}
                         </select>
                       </span>
+                      <hr>
 
                       <div class="row" id="fila_datos" name="fila_datos" >
                           <img id="indicador" name="indicador" class="htmx-indicator"  style="width: 20px; height: 20px;" src="{% static 'gifs/cargando.gif' %}" />

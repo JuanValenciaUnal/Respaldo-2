@@ -22,7 +22,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #from .forms import ProductosGastronomiaF
-from .models import Afeciones,Generos
+from .models import Afeciones,Generos,EnfermedadesAdicionales,Hipersensibilidad
 
 #Definicion vector de respuestas
 plantas_recomendadas =[]
@@ -34,8 +34,10 @@ def home(request):
         #pro= Plantasventa.objects.all()
         afecciones= Afeciones.objects.all().order_by('creado').values('id','afeccion')
         generos= Generos.objects.all().order_by('creado').values('id','genero')
+        enferemdadesadicionales=EnfermedadesAdicionales.objects.all()
+        hipersensibilidades=Hipersensibilidad.objects.all()
         nr=afecciones.count()
-        return render(request, 'home.html',{'afecciones':afecciones,'generos':generos,'nr':nr})   
+        return render(request, 'home.html',{'afecciones':afecciones,'generos':generos,'enferemdadesadicionales':enferemdadesadicionales,'hipersensibilidades':hipersensibilidades,'nr':nr})   
     # cuando se llama desde la caja buscar de mismo listado
 
 def recomendacionesV(request):
@@ -45,8 +47,21 @@ def recomendacionesV(request):
     generov=str(request.POST.get('genero'))
     embarazov=str(request.POST.get('embarazo'))
     lactanciav=str(request.POST.get('lactancia'))
-    #Defino la base de conocimiento
     
+    #Ojo estas son de seelcion multiple
+    enfermedadesadicinales = list(request.POST.getlist('enfermedadesa'))
+    #asi obtienes dada elemento de x poosiciones
+    for enfermedad in enfermedadesadicinales:
+        print(enfermedad)
+
+    #asi obtienes dada elemento de x poosiciones
+    hipersensibilidades = list(request.POST.getlist('hipsesensibilidades'))
+    for hipersensibilidad in hipersensibilidades:
+        print(hipersensibilidad)
+
+    #print('Enfermedades adicionales ',enfermedadesadicinales)
+    #print('hipersensibilidad  ',hipersensibilidades)
+
     engine =Base_de_conocimiento()
     engine.reset()
     engine.declare(SistemaAfectado(afectacion=afeccionv),embarazo(estado=embarazov),lactancia(estado=lactanciav),edad(x=edadv))
