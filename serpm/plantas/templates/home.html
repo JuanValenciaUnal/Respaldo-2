@@ -42,7 +42,7 @@
                       <hr>
                       <label for="" style="color: #005ba6;font-weight: bold;">Enfermedades Adicionales: *</label>
                       <span class="input-group-text" id="basic-addon1">
-                        <select class="form-select" id="enfermedadesa" name="enfermedadesa" multiple>
+                        <select class="form-select" id="enfermedadesa" name="enfermedadesa" multiple size="4">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
                             {% for enferemdadesadicional in enferemdadesadicionales %}
                                 <option value="{{enferemdadesadicional.enfermedad}}">{{enferemdadesadicional.enfermedad}}</option> 
@@ -52,7 +52,7 @@
                       <hr>  
                       <label for="" style="color: #005ba6;font-weight: bold;">Hipersensibilidad: *</label>
                       <span class="input-group-text" id="basic-addon1">
-                        <select class="form-select" id="hipsesensibilidades" name="hipsesensibilidades" multiple>
+                        <select class="form-select" id="hipsesensibilidades" name="hipsesensibilidades" multiple size="8">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
                             {% for hipersensibilidad in hipersensibilidades %}
                                 <option value="{{hipersensibilidad.componente}}">{{hipersensibilidad.componente}}</option> 
