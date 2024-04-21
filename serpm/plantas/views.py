@@ -48,13 +48,13 @@ def recomendacionesV(request):
     embarazov=str(request.POST.get('embarazo'))
     lactanciav=str(request.POST.get('lactancia'))
     
-    #Ojo estas son de seelcion multiple
+    #Estas son de seelcion multiple
     enfermedadesadicinales = list(request.POST.getlist('enfermedadesa'))
-    #asi obtienes dada elemento de x poosiciones
+    #Se obtiene dada elemento de x poosiciones
     for enfermedad in enfermedadesadicinales:
         print(enfermedad)
 
-    #asi obtienes dada elemento de x poosiciones
+    # elemento de x poosiciones
     hipersensibilidades = list(request.POST.getlist('hipsesensibilidades'))
     for hipersensibilidad in hipersensibilidades:
         print(hipersensibilidad)
@@ -178,9 +178,9 @@ class Base_de_conocimiento(KnowledgeEngine):
     #Respiratorias para no embarazadas
     @Rule(AND(SistemaAfectado(tratamiento= 'Propiedades respiratorias'),AND(embarazo(estado='Negativo'),lactancia(estado= 'Negativo'))))
     def recomendacion5(self):
-        plantas_recomendadas.extend(['Eucalipto','Ginseng','Hiedra','Hisopo','Jengibre','Malva','Oregano','Pensamiento','Sabila','Sauco','Verbena officinalis','Vira-vira','Eucalipto','Cimifuga','Ruda','Violeta','Mielenrama','Guarana','Canela','Quina','Salvia'])
+        plantas_recomendadas.extend(['Eucalipto','Ginseng','Hiedra','Hisopo','Jengibre','Malva','Oregano','Pensamiento','Sabila','Sauco','Verbena','Vira-vira','Cimifuga','Ruda','Violeta','Mielenrama','Guarana','Canela','Quina','Salvia'])
         self.declare(edad(evaluacion='y'))
-        #self.declare(enfermedades_adicionales(evaluacion='y'))
+        self.declare(enfermedades_adicionales(evaluacion='y'))
         
 
     #Respiratorias para embarazadas
@@ -250,8 +250,7 @@ class Base_de_conocimiento(KnowledgeEngine):
     @Rule(AND(SistemaAfectado(tratamiento= 'Propiedades reproductivos y hormonales'),AND(embarazo(estado='Negativo'),lactancia(estado= 'Negativo'))))
     def recomendacion15(self):
         plantas_recomendadas.extend(['Ginseng','Guarana','Anamu','Balsamina','Brusca','Calendula','Culantro','Perejil','Ruda','Sauco'])
-        self.declare(enfermedades_adicionales(evaluacion='y'))
-        self.declare(edad(evaluacion='y'))
+        self.declare(enfermedades_adicionales(evaluacion='y'),edad(evaluacion='y'))
 
     #reproductivos y hormonales embarazadas
     @Rule(AND(SistemaAfectado(tratamiento= 'Propiedades reproductivos y hormonales'),OR(embarazo(estado='Positivo'),lactancia(estado="Positivo"))))
