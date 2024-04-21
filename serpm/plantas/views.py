@@ -41,7 +41,7 @@ def home(request):
     # cuando se llama desde la caja buscar de mismo listado
 
 def recomendacionesV(request):
-    print(request.POST)
+    #print(request.POST)
     afeccionv=str(request.POST.get('afecciones'))
     edadv=int(request.POST.get('edad'))
     generov=str(request.POST.get('genero'))
@@ -54,13 +54,11 @@ def recomendacionesV(request):
     for enfermedad in enfermedadesadicinales:
         print(enfermedad)
 
-    # elemento de x poosiciones
-    hipersensibilidades = list(request.POST.getlist('hipsesensibilidades'))
-    for hipersensibilidad in hipersensibilidades:
-        print(hipersensibilidad)
+    # elemento de x poosiciones y los pasa a minusculas
+    hipsesensibilidades = [valor.lower() for valor in request.POST.getlist('hipsesensibilidades')]
 
-    #print('Enfermedades adicionales ',enfermedadesadicinales)
-    #print('hipersensibilidad  ',hipersensibilidades)
+    for hipersensibilidad in hipsesensibilidades:
+        print(hipersensibilidad)
 
     engine =Base_de_conocimiento()
     engine.reset()
