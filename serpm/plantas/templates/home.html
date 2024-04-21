@@ -16,7 +16,7 @@
 <div class="container">
   <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
-          <div class="card shadow-lg p-1 mb-1 container-lg bg-light container" style="max-width: 35rem;">
+          <div class="card shadow-lg p-1 mb-1 container-lg bg-light container" style="max-width: 35rem; border-radius: 20px 20px 20px 20px;">
               <div class="card-body">
                   <div class="card shadow-lg p-1 mb-1;card text-white" style="text-align: center;height: 50px;box-shadow: 01px 01px 01px 01px;background-color:#005ba6;"><h2>RECOMENDACIONES</h2></div>
                   <br>  
@@ -90,9 +90,11 @@
           </div>
       </div>
   </div>
-  <div class="row" id="resultados" name="resultados" >
-    <img id="indicador2" name="indicador2" class="htmx-indicator" src="{% static 'gifs/cargando.gif' %}" />
-</div>
+  <div class="card shadow-lg p-1 mb-1 container-lg bg-light container" style="width: 35rem; border-radius: 20px 20px 20px 20px;">
+    <div class="row" id="resultados" name="resultados" >
+      <img id="indicador2" name="indicador2" class="htmx-indicator" src="{% static 'gifs/cargando.gif' %}" />
+  </div>
+ </div> 
   </div>
 </div>
 <br><br><br><br><br><br><br><br>
