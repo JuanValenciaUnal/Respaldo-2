@@ -60,14 +60,13 @@ def recomendacionesV(request):
     for hipersensibilidad in hipsesensibilidades:
         print(hipersensibilidad)
 
+    #cargar_datos(afeccionv,embarazov,lactanciav,edadv)
     engine =Base_de_conocimiento()
     engine.reset()
     engine.declare(SistemaAfectado(afectacion=afeccionv),embarazo(estado=embarazov),lactancia(estado=lactanciav),edad(x=edadv))
     engine.run()
 
-
     return render(request, 'recomendaciones.html',{'plantas_recomendadas':plantas_recomendadas})
-
 
 #***************************************
 def acercadeV(request):
@@ -110,7 +109,7 @@ class hipersensibilidad(Fact):
     pass
 
 class Base_de_conocimiento(KnowledgeEngine):
-    
+
 #Reglas principales primer nivel
     #Tratamiento golpes o heridas
     @Rule(SistemaAfectado(afectacion='Golpes o heridas'))
