@@ -65,7 +65,9 @@ def recomendacionesV(request):
     engine.reset()
     engine.declare(SistemaAfectado(afectacion=afeccionv),embarazo(estado=embarazov),lactancia(estado=lactanciav),edad(x=edadv))
     engine.run()
-
+    
+    print('vaaaaaaaaaaaaaaa')
+    print(plantas_recomendadas)
     return render(request, 'recomendaciones.html',{'plantas_recomendadas':plantas_recomendadas})
 
 #***************************************
