@@ -3,16 +3,11 @@
 {% load static %}
 {% block content %}
 
-<!-- enlaces para botosn de whatsApp -->
-<!-- Enlazar CSS Floating WhatsApp -->
-<link rel="stylesheet" href="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.css">
-<!-- Enlazar JS Floating WhatsApp -->
 <script type="text/javascript" src="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.js"></script>
 
 <script src="{% static '/js/jshome.js' %}"></script>
 <link re>
 <br><br><br>
-
 <div class="container">
   <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
@@ -31,7 +26,7 @@
                       {{form|crispy}}
                       <label for="" style="color: #005ba6;font-weight: bold;">Afecciónes: *</label>
                       <span class="input-group-text" id="basic-addon1" >
-                        <select class="form-select" id="afecciones" name="afecciones">
+                        <select class="form-select" id="afecciones" name="afecciones" data-bs-toggle="tooltip" title="Permite selelcionar las afeciones">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
                             <option value="0">Selecione afección</option> 
                             {% for afeccion in afecciones %}
@@ -42,7 +37,7 @@
                       <hr>
                       <label for="" style="color: #005ba6;font-weight: bold;">Enfermedades Adicionales: *</label>
                       <span class="input-group-text" id="basic-addon1">
-                        <select class="form-select" id="enfermedadesa" name="enfermedadesa" multiple size="4">
+                        <select class="form-select" id="enfermedadesa" name="enfermedadesa" multiple size="4" data-bs-toggle="tooltip" title="Selecione una o mas enfermedades adicionales (use ctrl + click)"> 
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
                             {% for enferemdadesadicional in enferemdadesadicionales %}
                                 <option value="{{enferemdadesadicional.enfermedad}}">{{enferemdadesadicional.enfermedad}}</option> 
@@ -52,7 +47,7 @@
                       <hr>  
                       <label for="" style="color: #005ba6;font-weight: bold;">Hipersensibilidad: *</label>
                       <span class="input-group-text" id="basic-addon1">
-                        <select class="form-select" id="hipsesensibilidades" name="hipsesensibilidades" multiple size="4">
+                        <select class="form-select" id="hipsesensibilidades" name="hipsesensibilidades" multiple size="4" data-bs-toggle="tooltip" title="Selecione una o mas Hipersensibilidades adicionales (use ctrl + click)">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
                             {% for hipersensibilidad in hipersensibilidades %}
                                 <option value="{{hipersensibilidad.componente}}">{{hipersensibilidad.componente}}</option> 
@@ -90,6 +85,7 @@
           </div>
       </div>
   </div>
+
   <div class="card shadow-lg p-1 mb-1 container-lg bg-light container" style="width: 35rem; border-radius: 20px 20px 20px 20px;">
     <div class="card shadow-lg p-1 mb-1;card text-white" style="text-align: center;height: 50px;box-shadow: 01px 01px 01px 01px;background-color:#005ba6;"><h2>Recondando</h2></div>
     <div class="row" id="resultados" name="resultados" >
