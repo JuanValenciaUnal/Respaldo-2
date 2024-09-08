@@ -33,7 +33,7 @@
                       <span class="input-group-text" id="basic-addon1" >
                         <select class="form-select" id="afecciones" name="afecciones">
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
-                            <option value="0">Selecione afección</option> 
+                            <option value="0">Seleccione afección</option> 
                             {% for afeccion in afecciones %}
                                 <option value="{{afeccion.afeccion}}">{{afeccion.afeccion}}</option> 
                             {% endfor %}
@@ -70,7 +70,7 @@
                             hx-target="#fila_datos"
                           >
                             <!-- especie.especie_id es el ide de la especie, para extarelo y guarda luego en la tabla especies-->
-                            <option value="0" required>---------</option>
+                            <option value="0" required>Seleccione genero</option>
                             {% for genero in generos %}
                                 <option value="{{genero.genero}}">{{genero.genero}}</option> 
                             {% endfor %}
