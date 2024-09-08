@@ -1,5 +1,10 @@
-    
-    <h3 style="text-align: center;">Pude hacer uso de las siguintes plantas: </h3>
+    <div class="container">
+        <h5 style="text-align: left; margin-left: 5px;"><br>Recomendaciones: </h5>
+    </div>    
     <div class="container" style="width: 35rem; text-align: center;">
-        <p style="text-align:justify;">{{plantas_recomendadas}}</p>
+        <p style="text-align:justify;">
+            {% for planta in plantas_recomendadas %}
+                {{planta}},
+            {% endfor %} 
+            </p>
     </div>
