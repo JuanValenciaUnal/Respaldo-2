@@ -1,4 +1,5 @@
 from experta import *
+import pandas as pd
 #importaciones para recaptcha
 import urllib
 import json
@@ -25,7 +26,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Afeciones,Generos,EnfermedadesAdicionales,Hipersensibilidad
 
 #Definicion vector de respuestas
-plantas_recomendadas =[]
+global hipsesensibilidades
+plantas_recomendadas= []
 # Create your views here.
 # **********************************
 def home(request):
@@ -41,6 +43,7 @@ def home(request):
     # cuando se llama desde la caja buscar de mismo listado
 
 def recomendacionesV(request):
+    
     #print(request.POST)
     afeccionv=str(request.POST.get('afecciones'))
     edadv=int(request.POST.get('edad'))
@@ -56,19 +59,18 @@ def recomendacionesV(request):
 
     # elemento de x poosiciones y los pasa a minusculas
     hipsesensibilidades = [valor.lower() for valor in request.POST.getlist('hipsesensibilidades')]
-
     for hipersensibilidad in hipsesensibilidades:
         print(hipersensibilidad)
 
-    #cargar_datos(afeccionv,embarazov,lactanciav,edadv)
+    plantas_recomendadas.clear()
     engine =Base_de_conocimiento()
     engine.reset()
     engine.declare(SistemaAfectado(afectacion=afeccionv),embarazo(estado=embarazov),lactancia(estado=lactanciav),edad(x=edadv))
     engine.run()
-    
-    print('vaaaaaaaaaaaaaaa')
-    print(plantas_recomendadas)
+
+
     return render(request, 'recomendaciones.html',{'plantas_recomendadas':plantas_recomendadas})
+
 
 #***************************************
 def acercadeV(request):
@@ -110,40 +112,59 @@ class hipersensibilidad(Fact):
     #hipersensibilidades a algun compuesto de alguna planta
     pass
 
-class Base_de_conocimiento(KnowledgeEngine):
 
+def buscar_valores(dataframe, lista_busqueda):
+    resultados = []
+    for valor in lista_busqueda:
+        # Buscar si el valor está en cualquier parte de la columna 7
+        mask = dataframe.iloc[:, 6].str.contains(valor, case=False, na=False)
+        # Filtrar el DataFrame usando la máscara de la planta
+        resultados.extend(dataframe.loc[mask, 'Planta '].tolist())
+        #Elimino duplicados
+        sin_duplicados = set(resultados)
+
+class Base_de_conocimiento(KnowledgeEngine):
+    
 #Reglas principales primer nivel
     #Tratamiento golpes o heridas
     @Rule(SistemaAfectado(afectacion='Golpes o heridas'))
     def IdentificarAfectacion(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Antiinflamatorios y analgesicas'))
     #Tratamiento problemas cardiovasculares
     @Rule(SistemaAfectado(afectacion='Problemas cardiovasculares'))
     def IdentificarAfectacion2(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades cardiovasculares'))
     #Tratamiento problemas respiratorios
     @Rule(SistemaAfectado(afectacion='Problemas respiratorios'))
     def IdentificarAfectacion3(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades respiratorias'))
     #Tratamiento problemas Digestivos
     @Rule(SistemaAfectado(afectacion='Problemas digestivos'))
     def IdentificarAfectacion4(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades digestivas'))
     #Tratamiento problemas inmunologicos
     @Rule(SistemaAfectado(afectacion='Problemas inmunologicos'))
     def IdentificarAfectacion5(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades inmunologicas'))  
     #Tratamiento problemas gastrointestinales
     @Rule(SistemaAfectado(afectacion='Problemas gastrointestinales'))
     def IdentificarAfectacion6(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades gastrointestinales'))
     #Tratamiento problemas Dermatologicos o cicatrizantes
     @Rule(SistemaAfectado(afectacion='Problemas dermatologicos o cicatrizantes'))
     def IdentificarAfectacion7(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades dermatologicos o cicatrizantes'))
     #Tratamiento problemas reproductivos y hormonales
     @Rule(SistemaAfectado(afectacion='Problemas reproductivos y hormonales'))
     def IdentificarAfectacion8(self):
+        plantas_recomendadas = []
         self.declare(SistemaAfectado(tratamiento= 'Propiedades reproductivos y hormonales'))        
         
 #Reglas segundo nivel
@@ -336,5 +357,15 @@ class Base_de_conocimiento(KnowledgeEngine):
         for planta_peligrosa in no_aptas:
             if planta_peligrosa in plantas_recomendadas:
                 plantas_recomendadas.remove(planta_peligrosa)
+    
+    #Regla Hipersensibilidades 
+    @Rule(hipersensibilidad(estado='Positivo'))           
+    def hipersensible(self):
+        ruta_archivo = r'C:\Users\Juan José Valemcia M\Desktop\Articulos Tesisi\Sistema experto plantas\Sistema-experto-plantas-medicinales\serpm\Plantas_propiedades_arr.csv' 
+        df = pd.read_csv(ruta_archivo)
+        resultado= buscar_valores(df, hipsesensibilidades)
+        for planta in plantas_recomendadas:
+            if planta in resultado:
+                plantas_recomendadas.remove(planta)
         
 

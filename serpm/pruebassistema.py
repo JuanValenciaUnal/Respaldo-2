@@ -246,10 +246,10 @@ class Base_de_conocimiento(KnowledgeEngine):
 
 
 
-# engine =Base_de_conocimiento()
-# engine.reset()
-# engine.declare(SistemaAfectado(afectacion='Problemas respiratorios'),embarazo(estado='Negativo'),lactancia(estado='Negativo'),enfermedades_adicionales(enfermedades= 'Hipertension'),edad(x= 20))
-# engine.run()
+engine =Base_de_conocimiento()
+engine.reset()
+engine.declare(SistemaAfectado(afectacion='Golpes o heridas'),embarazo(estado='Positivo'),lactancia(estado='Negativo'),edad(x= 35))
+engine.run()
 
 class TestRules(unittest.TestCase):
     def test_recomendacion(self):
@@ -261,8 +261,8 @@ class TestRules(unittest.TestCase):
         expected_plants = ['Eucalipto', 'Hiedra', 'Hisopo', 'Jengibre', 'Malva', 'Oregano', 'Sabila', 'Verbena officinalis', 'Cimifuga', 'Violeta', 'Mielenrama', 'Guarana', 'Canela', 'Quina', 'Salvia']
         self.assertEqual(plantas_recomendadas, expected_plants)
 
-if __name__ == '__main__':
-    unittest.main()
+#if __name__ == '__main__':
+#    unittest.main()
 
 
 print("Plantas: ",plantas_recomendadas)
